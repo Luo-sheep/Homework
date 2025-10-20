@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <ctype.h> 
+/*AI写的，有点高级了*/
+void caesar_cipher(const char *message, int shift) {
+    char ch;
+    while ((ch = *message++) != '\0') {
+        if (isalpha(ch)) {
+            char base = isupper(ch) ? 'A' : 'a';
+            // 保持大小写并进行循环移位
+            putchar((ch - base + shift) % 26 + base);
+        } else {
+            // 非字母字符直接输出
+            putchar(ch);
+        }
+    }
+    putchar('\n');
+}
+
+int main() {
+    char message[1000];
+    int shift;
+
+    printf("Enter message to be encrypted: ");
+    fgets(message, sizeof(message), stdin);  // 读取整行，包括空格
+
+    printf("Enter shift amount (1-25): ");
+    scanf("%d", &shift);
+
+    printf("Encrypted message: ");
+    caesar_cipher(message, shift);
+
+    return 0;
+}
