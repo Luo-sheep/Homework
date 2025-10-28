@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define STACK_SIZE 100
+#define STACK_SIZE 5
 
 /* external variables */
 char contents[STACK_SIZE];
