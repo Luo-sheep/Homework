@@ -5,17 +5,17 @@
 #define LIM 20
 #define HALT ""
 void stsrt (char *strings[],int num);
-char *
+char * ;
 
 int main (void)
 {
-char input [LIM] [SIZE]:
-char *ptstr [LIM]:
-int ct = 0:
+char input [LIM] [SIZE];
+char *ptstr [LIM];
+int ct = 0;
 int k;
 }
 
-ptstr[ct] = input[ct]:
+ptstr[ct] = input[ct];
 ct++;
 
 stsrt (ptstr, ct):
@@ -27,18 +27,6 @@ return 0:
 
 /* 字符串-指针-排序函数 */
 void stsrt (char *strings[], int num)
-
-/* 存储输入的数组
-/* 指针变量的数组
-/*输入计数
-/* 输出计数
-
 printf ("Input up to $d lines, and I will sort them. \n", LIM);
 printf ("To stop, press the Enter key at a line's start. \n");
 while (ct < LIM && gets (input [ct]) != NULL && input [ct] [0] != '\0')
-
-/*令指针指向输入字符串
-
-/* 调用字符串排序函数
-
-/*排序后的指针
