@@ -38,6 +38,6 @@ int main(void)
     total = sum(marbles, 5);
     printf("The total number of marbles is %d.\n", total);
     printf("The size of marbles is %zu bytes.\n", sizeof marbles);
-
+    
     return 0;
 }
