@@ -22,5 +22,15 @@ int main()
 }
 
 //gogogo，出发啦！
-char 
+int go(void)
+{
+    switch (rand()%4)
+    {
+        case 0: return 'U'; break;
+        case 1: return 'D'; break;
+        case 2: return 'L'; break;
+        case 3: return 'R'; break;
+    }
+    return 0;
+}
 //终止判断
