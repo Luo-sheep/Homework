@@ -33,15 +33,21 @@ A	B	G	H	I	.	.	.	.	.
 
 #include <stdio.h>
 #include <stdlib.h> 
+#include <time.h>  // 添加这个头文件
+void go(char (*pt)[10]);
+int check(char (*pt)[10],int x,int y);
+//函数声明不可或缺！！！
 
 int main()
 {
+    srand((unsigned int)time(NULL));//添加随机种子
+
     //初始化
     char map[10][10];
     for (int i=0;i<10;i++)
         for (int j=0;j<10;j++)
             map[i][j] = '.';
-
+    printf("初始地图:\n");
     for (int i=0;i<10;i++)
     {
         for (int j=0;j<10;j++)
@@ -53,7 +59,16 @@ int main()
     }
 
     go(map);
-
+    printf("\n最终地图:\n");
+    for (int i=0;i<10;i++)
+    {
+        for (int j=0;j<10;j++)
+            {
+                printf("%c",map[i][j]);
+                if (j==9)
+                    printf("\n");
+            }
+    }
     return 0;
 }
 
@@ -61,12 +76,23 @@ int main()
 void go(char (*pt)[10])//（*pt）亦可作pt[]
 {
     char ch='A';
-    int r,n=0,m=0,chkh=m,chkv=n;
+    int r,l,n=0,m=0,chkh=m,chkv=n;
+    pt[m][n] = ch++;   // 标记起始位置
+    
     while(ch<='Z')//终止判断
     {
-        
-        r=rand()%5;
-        
+        int a[4]={0};//记录方向
+        r=rand()%4;
+        a[r]=1;
+        tryagain:while(a[r]==1)//排除已走过的方向
+        {
+            r=rand()%4;
+            a[r]=1;
+            if(a[0]==1&&a[1]==1&&a[2]==1&&a[3]==1)
+                goto end;//四个方向都走过，结束
+        }
+
+        //检验方向合法性
         switch(r)
         {
             case 0://上
@@ -84,8 +110,7 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
         }
         if(check(pt,chkh,chkv))//合法移动
         {
-            pt[chkv][chkh]=ch;
-            ch++;
+            pt[chkv][chkh]=ch++;
             m=chkh;
             n=chkv;
         }
@@ -93,9 +118,10 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
         {
             chkh=m;
             chkv=n;
+            goto tryagain;
         }
     }
-    return 0;
+    end:return 0;
 }
 
 //判断是否合法移动
