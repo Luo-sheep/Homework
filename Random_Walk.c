@@ -13,7 +13,12 @@ J	.	.	.	.	.	.	.	Z	.
 K	.	.	R	S	T	U	V	Y	.
 L	M	P	Q	.	.	.	W	X	.
 .	N	O	.	.	.	.	.	.	.
-利用srand函数和rand函数产生随机数，然后查看次数除以4的余数。余数一共有4种可能的值（0、1、2和3），指示下一次移动的4种可能方向。在执行移动之前，需要检查两项内容：一是不能走到数组外面，二是不能走到已有字母标记的位置。只要一个条件不满足，就得尝试换一个方向移动。如果4个方向都堵住了，程序就必须终止了。下面是提前结束的一个示例:
+利用srand函数和rand函数产生随机数，然后查看次数除以4的余数。
+余数一共有4种可能的值（0、1、2和3），指示下一次移动的4种可能方向。
+在执行移动之前，需要检查两项内容：
+一是不能走到数组外面，二是不能走到已有字母标记的位置。
+只要一个条件不满足，就得尝试换一个方向移动。
+如果4个方向都堵住了，程序就必须终止了。下面是提前结束的一个示例:
 
 A	B	G	H	I	.	.	.	.	.
 .	C	F	O	J	K	.	.	.	.
@@ -28,6 +33,7 @@ A	B	G	H	I	.	.	.	.	.
 
 #include <stdio.h>
 #include <stdlib.h> 
+
 int main()
 {
     //初始化
@@ -46,19 +52,60 @@ int main()
             }
     }
 
+    go(map);
+
     return 0;
 }
 
 //gogogo，出发啦！
-int go(void)
+void go(char (*pt)[10])//（*pt）亦可作pt[]
 {
-    switch (rand()%4)
+    char ch='A';
+    int r,n=0,m=0,chkh=m,chkv=n;
+    while(ch<='Z')//终止判断
     {
-        case 0: return 'U'; break;
-        case 1: return 'D'; break;
-        case 2: return 'L'; break;
-        case 3: return 'R'; break;
+        
+        r=rand()%5;
+        
+        switch(r)
+        {
+            case 0://上
+                chkv --;
+                break;
+            case 1://下
+                chkv++;
+                break;
+            case 2://左
+                chkh--;
+                break;
+            case 3://右
+                chkh++;
+                break;
+        }
+        if(check(pt,chkh,chkv))//合法移动
+        {
+            pt[chkv][chkh]=ch;
+            ch++;
+            m=chkh;
+            n=chkv;
+        }
+        else//不合法，复原
+        {
+            chkh=m;
+            chkv=n;
+        }
     }
     return 0;
 }
-//终止判断
+
+//判断是否合法移动
+int check(char (*pt)[10],int x,int y)
+{
+    if (x<0||x>9||y<0||y>9)//越界
+        return 0;
+    if (pt[y][x]!='.')//已有标记
+        return 0;
+    return 1;
+}
+//确定移动方向（）
+//生成方向，排除不合法的方向
