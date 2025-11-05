@@ -61,6 +61,7 @@ int main()
     }
 
     go(map);
+
     printf("\n最终地图:\n");
     for (int i=0;i<10;i++)
     {
@@ -126,11 +127,12 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
             pt[chkv][chkh]=ch++;
             m=chkh;
             n=chkv;
+            break;
         }
 
         //四个方向都走过，结束
         if(a[0]==1&&a[1]==1&&a[2]==1&&a[3]==1)
-            break;
+            goto end;
         //不合法，复原
         else
         {
@@ -141,7 +143,7 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
 
         }
     }
-    return 0;
+    end:return 0;
 }
 
 //判断是否合法移动
