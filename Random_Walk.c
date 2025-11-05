@@ -38,7 +38,7 @@ A	B	G	H	I	.	.	.	.	.
 
 void go(char (*pt)[10]);
 int check(char (*pt)[10],int x,int y);
-//函数声明不可或缺！！！
+//函数声明不可或缺！！！（规范就是规范）
 
 int main()
 {
@@ -85,12 +85,16 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
     while(ch<='Z')//终止判断
     {
         int a[4]={0};//记录方向
-        while
-        r=rand()%4;
-        a[r]=1;
         int chkh=m;//水平位置
         int chkv=n;//垂直位置
-        /*tryagain:
+
+        while(!check(pt,chkh,chkv))
+        {
+            r=rand()%4;
+            a[r]=1;
+        
+        /*本来这里goto的，但是把后面的语句都包进去了，思路不清晰，但现在好了
+        tryagain:
         while(a[r]==1)//排除已走过的方向
         {
             r=rand()%4;
@@ -103,7 +107,7 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
         switch(r)
         {
             case 0://上
-                chkv --;
+                chkv--;
                 break;
             case 1://下
                 chkv++;
@@ -116,20 +120,27 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
                 break;
         }
 
-        if(check(pt,chkh,chkv))//合法移动
+        //合法移动
+        if(check(pt,chkh,chkv))
         {
             pt[chkv][chkh]=ch++;
             m=chkh;
             n=chkv;
         }
-        else//不合法，复原
+
+        //四个方向都走过，结束
+        if(a[0]==1&&a[1]==1&&a[2]==1&&a[3]==1)
+            break;
+        //不合法，复原
+        else
         {
             chkh=m;
             chkv=n;
             continue;
         }
+
+        }
     }
-    end:
     return 0;
 }
 
