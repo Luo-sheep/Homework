@@ -49,25 +49,13 @@ int main()
     for (int i=0;i<10;i++)
         for (int j=0;j<10;j++)
             map[i][j] = '.';
-    printf("初始地图:\n");
-    for (int i=0;i<10;i++)
-    {
-        for (int j=0;j<10;j++)
-            {
-                printf("%c",map[i][j]);
-                if (j==9)
-                    printf("\n");
-            }
-    }
 
     go(map);
-
-    printf("\n最终地图:\n");
     for (int i=0;i<10;i++)
     {
         for (int j=0;j<10;j++)
             {
-                printf("%c",map[i][j]);
+                printf("%c ",map[i][j]);
                 if (j==9)
                     printf("\n");
             }
@@ -132,7 +120,7 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
 
         //四个方向都走过，结束
         if(a[0]==1&&a[1]==1&&a[2]==1&&a[3]==1)
-            goto end;
+            goto end;//用goto跳出循环
         //不合法，复原
         else
         {
@@ -143,7 +131,7 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
 
         }
     }
-    end:return 0;
+    end:return;
 }
 
 //判断是否合法移动
@@ -155,4 +143,3 @@ int check(char (*pt)[10],int x,int y)
         return 0;
     return 1;
 }
-
