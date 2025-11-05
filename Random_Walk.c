@@ -33,7 +33,9 @@ A	B	G	H	I	.	.	.	.	.
 
 #include <stdio.h>
 #include <stdlib.h> 
-#include <time.h>  // 添加这个头文件
+
+#include <time.h>  // 添加这个头文件，以使用time函数，获取时间（随机数种子）
+
 void go(char (*pt)[10]);
 int check(char (*pt)[10],int x,int y);
 //函数声明不可或缺！！！
@@ -76,21 +78,26 @@ int main()
 void go(char (*pt)[10])//（*pt）亦可作pt[]
 {
     char ch='A';
-    int r,l,n=0,m=0,chkh=m,chkv=n;
+    int r,l,n=0,m=0;//r方向，l临时变量，n行，m列
+
     pt[m][n] = ch++;   // 标记起始位置
     
     while(ch<='Z')//终止判断
     {
         int a[4]={0};//记录方向
+        while
         r=rand()%4;
         a[r]=1;
-        tryagain:while(a[r]==1)//排除已走过的方向
+        int chkh=m;//水平位置
+        int chkv=n;//垂直位置
+        /*tryagain:
+        while(a[r]==1)//排除已走过的方向
         {
             r=rand()%4;
             a[r]=1;
             if(a[0]==1&&a[1]==1&&a[2]==1&&a[3]==1)
                 goto end;//四个方向都走过，结束
-        }
+        }*/
 
         //检验方向合法性
         switch(r)
@@ -108,6 +115,7 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
                 chkh++;
                 break;
         }
+
         if(check(pt,chkh,chkv))//合法移动
         {
             pt[chkv][chkh]=ch++;
@@ -118,10 +126,11 @@ void go(char (*pt)[10])//（*pt）亦可作pt[]
         {
             chkh=m;
             chkv=n;
-            goto tryagain;
+            continue;
         }
     }
-    end:return 0;
+    end:
+    return 0;
 }
 
 //判断是否合法移动
@@ -133,5 +142,4 @@ int check(char (*pt)[10],int x,int y)
         return 0;
     return 1;
 }
-//确定移动方向（）
-//生成方向，排除不合法的方向
+
