@@ -47,8 +47,8 @@ int main()
     int ct = 0;                   /* 输入计数             */
     int k;                        /* 输出计数             */
 
-    while (ct < LIM && s_gets(input[ct], SIZE) != NULL
-            && input[ct][0] != '\0')
+    while (s_gets(input[ct], SIZE) != NULL
+            && strlen(input[ct])!=4)
     {
         ptstr[ct] = input[ct];    /* 设置指针指向字符串    */
         ct++;
