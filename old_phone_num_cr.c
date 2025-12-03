@@ -1,29 +1,64 @@
-/*  */
 #include <stdio.h>
 #include <string.h>   
 
 #define SIZE 40
-char * tele_gets(char * st, int n);
-
-char * transfer(char * tfnum);
+void transfer(char *tf);
 
 int main(void)
 {
     char call[SIZE];
 
     puts("Enter phone number:");
-    tele_gets(call, SIZE);
-    for (int i;call[i];i++)// 等价于 *str != '\0'
-    {
-        if ('A'<=call[i] && call[i]<='Z')
-        transfer(call[i]);
-    }
-    puts("That's right!");
+    fgets(call, SIZE,stdin);
 
+    
+    transfer(call);
+    
+    for (int i=0;call[i];i++)
+    printf("%c",call[i]);
     return 0;
 }
 
-char * transfer(char * tf)
+
+void transfer(char *tf)
+{
+    // 定义分组边界和对应的数字
+    char groups[8][5] = {
+        "ABC",  // 2
+        "DEF",  // 3
+        "GHI",  // 4
+        "JKL",  // 5
+        "MNO",  // 6
+        "PQRS", // 7
+        "TUV",  // 8
+        "WXYZ"  // 9
+    };
+    
+    for (int i = 0; tf[i] != '\0'; i++)
+    {
+        char ch = tf[i];
+        if('A' <= ch && ch <= 'Z')
+        {
+            // 查找字符属于哪个分组
+            for (int g = 0; g < 8; g++)
+            {
+                // 检查字符是否在当前分组字符串中
+                for (int j = 0; groups[g][j] != '\0'; j++)
+                {
+                    if (ch == groups[g][j])
+                    {
+                        // 转换为数字
+                        tf[i] = '2' + g;
+                        break;
+                    }
+                }
+                if (tf[i] != ch)  // 如果已经转换，跳出循环
+                    break;
+            }
+        }
+    }
+}
+/*void transfer(char *tf)
 {
     int min='A';
     int max='Z';
@@ -36,27 +71,16 @@ char * transfer(char * tf)
         chat[i]=sum;
     }
     
-    for(int i=0;i<9;i++)
-        for(int a=2;;a++)  
-            if (chat[i]<=tf&&tf<=chat[i])
-                tf
-}
-
-char * tele_gets(char * st, int n)
-{
-    char * ret_val;
-    int i = 0;
-
-    ret_val = fgets(st, n, stdin);
-    if (ret_val)
+    for (int idx =0;tf[idx]!='\0';idx++)
     {
-        while (st[i] != '\n' && st[i] != '\0')
-            i++;
-        if (st[i] == '\n')
-            st[i] = '\0';
-        else 
-            while (getchar() != '\n')
-                 continue;
+        char ch = tf[idx];
+        if('A'<= ch && ch <='Z')
+        for(int i=0;i<9;i++)
+        for(int a=0;;a++)  
+            if (chat[i] <= ch && ch <= chat[i+1])
+                {
+                    tf[idx]='A'+a;
+                    break;
+                }
     }
-    return ret_val;
-}
+}*/
