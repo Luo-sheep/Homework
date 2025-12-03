@@ -1,18 +1,15 @@
-#include <stdio.h>
-#define STLEN 10
-int main(void)
-{
-    int min='A';
-    int max='Z';
-    int sum=min;
-    int chat[9]={min};
-    chat[9]=max;
-    for(int i=1;i<9;i++)
-    {
-        sum+=3;
-        chat[i]=sum;
-    }
-    for (int i=0;i<10;i++)
-    printf("%d ",chat[i]);
-    return 0;
-}
+   #include <stdio.h>
+   
+   int main() {
+       int arr[5] = {1, 2, 3, 4, 5};
+       int *ptr = arr; // 数组名就是数组首元素的地址
+       
+       // 使用指针访问数组元素
+       for(int i = 0; i < 5; i++) {
+           printf("arr[%d] = %d", i,*(arr+i) ); // 填空：通过指针访问数组元素
+           printf(", 地址: %p\n", arr[i]); // 填空：获取每个元素的地址
+           ptr++; // 指针移动到下一个元素
+       }
+       
+       return 0;
+   }
