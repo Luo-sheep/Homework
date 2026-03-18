@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <string.h>//用字符串别忘了提供这个头
+
 #define LEN 40
 
 #if 0
