@@ -1,4 +1,4 @@
-
+··
 #define Stack_Size 50
 typedef struct{
 ElemType elem[Stack_Size];
@@ -57,6 +57,6 @@ int compute_reverse_polish_notation(char *str)
     int ans;
     pop(s, &ans);
     free(s);
-    
+
     return res;
 }
